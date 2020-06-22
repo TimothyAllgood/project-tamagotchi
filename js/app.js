@@ -32,3 +32,16 @@ const sleepBtn = document.querySelector('#sleepiness button');
 const boredText = document.querySelector('#boredom p');
 const boredBar = document.querySelector('#boredom .status-color');
 const boredBtn = document.querySelector('#boredom button');
+
+timerControl();
+
+function timerControl(){
+    const timer = setInterval(()=>{
+        if(pet.time>0){
+            pet.time--;
+            console.log(pet.time)
+        } else{
+            clearInterval(timer);
+        }
+    }, 1000);
+}
