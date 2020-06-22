@@ -12,6 +12,19 @@ body{
     background-attachment: fixed;
 }
 
+/* Header */
+header{
+    display: flex;
+    width: 95vw;
+    top: 2.5vh;
+    left: 2.5vw;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+}
+
+
+/* Pet */
 #js-pet-contain{
     display: flex;
     flex-direction: column;
@@ -29,6 +42,7 @@ body{
     margin-bottom: -3vh;
 }
 
+/* Pet Status */
 #js-pet-status{
     display: flex;
     justify-content: center;
