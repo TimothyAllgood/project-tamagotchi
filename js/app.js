@@ -156,5 +156,9 @@ function endGame(timer){
     hungerBtn.removeEventListener('click', feedPet);
     sleepBtn.removeEventListener('click', turnOffLights);
     boredBtn.removeEventListener('click', playWithPet);
+    if(pet.hunger === 10){
+        document.querySelector('#js-pet-image').style.backgroundImage = 'url(https://lh3.googleusercontent.com/proxy/zX_kjJBYozyE2r51ld_KLhkAsBmkVxcAlXEMrO2qbsgHp-80AzLDwOD9mZXdY9bi-AfhB2H2eLMkVnfjnY_d5Kkjp4vv6EA0)'
+    }
+
     clearInterval(timer);
 }
