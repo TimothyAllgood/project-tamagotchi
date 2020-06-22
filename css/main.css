@@ -13,8 +13,8 @@ body{
     background-attachment: fixed;
 }
 
-/* Hide main screens */
 
+/* Settings Page */
 #settings-contain{
     width: 100vw;
     height: 100vh;
@@ -48,6 +48,21 @@ body{
     padding:  5px 10px;
 }
 
+.welcome-message{
+    position: absolute;
+    top: 15vh;
+}
+
+.welcome-message p {
+    margin-top: 10px;
+}
+
+.welcome-message a, .welcome-message a:visited{
+    color: purple;
+    text-decoration: none;
+}
+
+/* Hide main screens */
 .hidden{
     display: none !important;
 }
@@ -64,6 +79,8 @@ header{
 }
 
 
+
+
 /* Pet */
 #js-pet-contain{
     display: flex;
@@ -74,13 +91,20 @@ header{
 }
 
 #js-pet-image{
-    width: 250px;
-    height: 200px;
-    background-image: url('../assets/pet.png');
+    width: 64px;
+    height: 64px;
+    background-image: url('../assets/owlet-idle.png');
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
     margin-bottom: -3vh;
+    animation: play 1.5s steps(4) infinite ;
+    -webkit-animation: play 1.5s steps(4) infinite ;
 }
+
+@keyframes play {
+    100% { background-position: -256px; }
+}
+
 
 /* Pet Status */
 #js-pet-status{
