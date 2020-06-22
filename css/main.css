@@ -48,6 +48,19 @@ body{
     padding:  5px 10px;
 }
 
+#settings-contain img{
+    width: 150px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+#settings-contain img:hover{
+    cursor: pointer;
+    filter: brightness(1.2);
+    -webkit-filter: brightness(1.2);
+}
+
+
 .welcome-message{
     position: absolute;
     top: 15vh;

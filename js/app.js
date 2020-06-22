@@ -2,7 +2,7 @@ console.log('Welcome to Project Tamagotchi!')
 
 // Create Class For Pet
 class Pet{
-    constructor(name = 'Pet'){
+    constructor(name = 'Pet',){
         this.name = name;
         this.hunger = 0;
         this.hungerWidth = 0;
@@ -12,10 +12,11 @@ class Pet{
         this.boredomWidth = 0;
         this.time = 60;
         this.age = 1;
+        this.selectedChar = 'owlet'
     }
 }
 
-//Game State
+
 
 
 //Instantiate Pet
@@ -23,11 +24,18 @@ const pet = new Pet;
 
 console.log(pet);
 
+//Game State
+let petImg = `../assets/${pet.selectedChar}.png`;
+let petIdle = `../assets/${pet.selectedChar}-idle.png`;
+let petDeath = `../assets/${pet.selectedChar}-death.png`
+
 //------------DOM 
 // Settings Page Elements
 const startGameBtn = document.querySelector('#settings-contain button');
 const petInput = document.querySelector('#settings-contain input');
 const settings = document.querySelector('#settings-contain');
+
+const characterSelect = document.querySelector('.pet-select');
 
 
 const gamePage = document.querySelector('#game-contain');
@@ -62,6 +70,8 @@ const timerText = document.querySelector('header p');
 startGameBtn.addEventListener('click', startGame);
 
 window.addEventListener('keydown', pressEnter);
+// Handle Character Selection
+characterSelect.addEventListener('click', selectCharacter);
 
 // Handle Status Updates
 hungerBtn.addEventListener('click', feedPet);
@@ -91,6 +101,24 @@ function startGame(){
     timerControl();
 }
 
+// Character Selection Function
+
+function selectCharacter(e){
+    //if target has src it is an image
+   if(e.target.src){
+    pet.selectedChar = e.target.alt;
+    petImg = `../assets/${pet.selectedChar}.png`;
+    petIdle = `${pet.selectedChar}-idle.png`;
+    petDeath = `../assets/${pet.selectedChar}-death.png`;
+    setPetImage();
+   }   
+}
+// Set background-image for idle animation
+function setPetImage(){
+    document.querySelector('.js-pet-image').style.backgroundImage = `url(assets/${petIdle})`;
+}
+
+// Timer
 
 function timerControl(){
     const timer = setInterval(()=>{
@@ -217,6 +245,8 @@ function endGame(timer){
         // Update pet image on death
         document.querySelector('.game-end').classList.add('game-end-show');
         document.querySelector('.js-pet-image').className = 'pet-death';
+        // Call this hear because .pet-death is not created until this point
+        document.querySelector('.pet-death').style.backgroundImage = `url(assets/${petDeath})`;
     } else{ 
         // Run this if player wins
     }
