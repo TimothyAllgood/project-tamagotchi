@@ -27,8 +27,10 @@ console.log(pet);
 // Settings Page Elements
 const startGameBtn = document.querySelector('#settings-contain button');
 const petInput = document.querySelector('#settings-contain input');
+const settings = document.querySelector('#settings-contain');
 
 
+const gamePage = document.querySelector('#game-contain');
 // Name Elements
 const nameText = document.querySelector('#js-pet-info h3');
 
@@ -56,9 +58,12 @@ const timerText = document.querySelector('header p');
 
 
 //-------------Event Handlers
-
+// Handle Start Game if Button is clicked or Enter is pressed
 startGameBtn.addEventListener('click', startGame);
 
+window.addEventListener('keydown', pressEnter);
+
+// Handle Status Updates
 hungerBtn.addEventListener('click', feedPet);
 
 sleepBtn.addEventListener('click', turnOffLights);
@@ -68,9 +73,19 @@ boredBtn.addEventListener('click', playWithPet);
 
 //-------------Functions
 
+function pressEnter(e){
+    // If enter is pressed
+    if(e.keyCode === 13){
+        // Only fire if settings page is open
+        if(!document.querySelector('#settings-contain').classList.contains('hidden')){
+            startGame();
+        }
+    }
+}
+
 function startGame(){
-    document.querySelector('#settings-contain').classList.add('hidden');
-    document.querySelector('#game-contain').classList.remove('hidden');
+    settings.classList.add('hidden');
+    gamePage.classList.remove('hidden');
     setName();
     setAge();
     timerControl();
@@ -108,7 +123,7 @@ function agePet(ageInterval){
 
 function setName(){
     let petName = petInput.value;
-    pet.name = petName;
+    pet.name = petName || 'Pet'; // Give Name a default value
     nameText.textContent = `Name:${pet.name}`
     console.log(pet.name);
 }
