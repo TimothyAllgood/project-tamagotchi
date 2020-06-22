@@ -45,3 +45,20 @@ function timerControl(){
         }
     }, 1000);
 }
+
+//-------------Event Handlers
+
+hungerBtn.addEventListener('click', ()=>{
+    console.log('Hunger Clicked');
+});
+
+sleepBtn.addEventListener('click', ()=>{
+    console.log('Sleepy Clicked');
+});
+
+boredBtn.addEventListener('click', ()=>{
+    console.log('Bored Clicked');
+});
+
+
+//-------------Functions
