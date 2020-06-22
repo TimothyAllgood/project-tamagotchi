@@ -46,7 +46,10 @@ function timerControl(){
             raiseHunger();
             raiseSleep();
             raiseBoredom();
-        } else{
+            if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
+                endGame(timer);
+            }
+        }  else{
             endGame(timer);
         }
     }, 1000);
@@ -126,5 +129,6 @@ function raiseBoredom(){
 // End game
 
 function endGame(timer){
+    if(pet.hunger || pet.sleep || pet.boredom)
     clearInterval(timer);
 }

@@ -46,6 +46,7 @@ body{
 
 .status-grey{
     background: #d7d7d7;
+    width: 165px;
     padding: 10px 50px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -67,7 +68,7 @@ body{
 }
 
 .status button{
-    width: 164px;
+    width: 165px;
     font-family: 'Press Start 2P', cursive;
     font-size: 10px;
     padding: 10px 0;
