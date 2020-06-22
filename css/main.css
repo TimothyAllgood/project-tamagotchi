@@ -90,20 +90,39 @@ header{
     min-height: 100vh;
 }
 
-#js-pet-image{
-    width: 64px;
-    height: 64px;
+ .js-pet-image{
+    width: 250px;
+    height: 250px;
     background-image: url('../assets/owlet-idle.png');
     background-size: cover;
-    /* background-position: center; */
-    margin-bottom: -3vh;
+    /*background-position: center;
+    */margin-bottom: -3vh;
     animation: play 1.5s steps(4) infinite ;
-    -webkit-animation: play 1.5s steps(4) infinite ;
+    -webkit-animation: play 1.5s steps(4) infinite alternate;
+    /* filter:hue-rotate(45deg) ;
+    -webkit-filter:hue-rotate(45deg) ;  use for aging*/
 }
 
 @keyframes play {
-    100% { background-position: -256px; }
+    100% { background-position: -1000px; }
+} 
+
+.pet-death{
+    width: 237px;
+    height: 250px;
+    background-image: url('../assets/owlet-death.png');
+    background-size: cover;
+    /*background-position: center;
+    */margin-bottom: -3vh;
+    animation: playdeath 1.5s alternate steps(9);
+    -webkit-animation: playdeath 1.5s alternate steps(9);
 }
+
+@keyframes playdeath {
+    0%{ background-position: -245px;}
+    100% { background-position: -2359px; }
+}
+
 
 
 /* Pet Status */
