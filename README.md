@@ -1,7 +1,6 @@
 # Project Tamagotchi
 
-![Wireframe Image]
-(./assets/wireframe.png)
+![Wireframe Image](./assets/wireframe.png)
 
 ## User Stories
 Display a character of the player's choice on the screen
