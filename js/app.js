@@ -39,7 +39,8 @@ function timerControl(){
     const timer = setInterval(()=>{
         if(pet.time>0){
             pet.time--;
-            console.log(pet.time)
+            // console.log(pet.time)
+            raiseHunger()
         } else{
             clearInterval(timer);
         }
@@ -48,17 +49,52 @@ function timerControl(){
 
 //-------------Event Handlers
 
-hungerBtn.addEventListener('click', ()=>{
-    console.log('Hunger Clicked');
-});
+hungerBtn.addEventListener('click', feedPet);
 
-sleepBtn.addEventListener('click', ()=>{
-    console.log('Sleepy Clicked');
-});
+sleepBtn.addEventListener('click', turnOffLights);
 
-boredBtn.addEventListener('click', ()=>{
-    console.log('Bored Clicked');
-});
+boredBtn.addEventListener('click', playWithPet);
 
 
 //-------------Functions
+
+// Hunger Functions
+function feedPet(){
+    if(pet.hunger > 1){
+        pet.hunger--;
+        console.log(pet.hunger);
+    }
+}
+
+function raiseHunger(){
+    pet.hunger++;
+    console.log('Hunger: ', pet.hunger);
+}
+
+
+// Sleep Functions
+function turnOffLights(){
+    if(pet.sleep < 10){
+        pet.sleep++;
+        console.log(pet.sleep);
+    }
+}
+
+function raiseSleep(){
+    pet.sleep++;
+     console.log('Sleep: ', pet.sleep);
+}
+
+
+// Boredom Functions
+function playWithPet(){
+    if(pet.boredom < 10){
+        pet.boredom++;
+        console.log(pet.boredom);
+    }
+}
+
+function raiseBoredom(){
+    pet.boredom++;
+    console.log('Boredom: ', pet.boredom);
+}
