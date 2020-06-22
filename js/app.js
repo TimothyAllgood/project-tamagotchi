@@ -29,6 +29,12 @@ const startGameBtn = document.querySelector('#settings-contain button');
 const petInput = document.querySelector('#settings-contain input');
 
 
+// Name Elements
+const nameText = document.querySelector('#js-pet-info h3');
+
+// Age Elements
+const ageText =  document.querySelector('#js-pet-info p');
+
 // Hunger Elements
 const hungerText = document.querySelector('#hunger p');
 const hungerBar = document.querySelector('#hunger .status-color');
@@ -65,9 +71,8 @@ boredBtn.addEventListener('click', playWithPet);
 function startGame(){
     document.querySelector('#settings-contain').classList.add('hidden');
     document.querySelector('#game-contain').classList.remove('hidden');
-    // let petName = petInput.Value();
-    // pet.name = petName;
-    // console.log(pet.name);
+    setName();
+    setAge();
     timerControl();
 }
 
@@ -81,10 +86,7 @@ function timerControl(){
             raiseSleep();
             raiseBoredom();
             // Every x seconds increase pet age
-            if(pet.time % 30 === 0){
-                pet.age++;
-                console.log('Age:', pet.age);
-            }
+            agePet(30);
             // If pet hunger, sleep, or boredom stat reaches 10, player loses, and game ends
             if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
                 endGame(timer);
@@ -93,6 +95,26 @@ function timerControl(){
             endGame(timer);
         }
     }, 1000);
+}
+
+// Pet Name and Age
+function agePet(ageInterval){
+    if(pet.time % ageInterval === 0){
+        pet.age++;
+        console.log('Age:', pet.age);
+        setAge();
+    }
+}
+
+function setName(){
+    let petName = petInput.value;
+    pet.name = petName;
+    nameText.textContent = `Name:${pet.name}`
+    console.log(pet.name);
+}
+
+function setAge(){
+    ageText.textContent = `Age:${pet.age}`;
 }
 
 // Hunger Functions
