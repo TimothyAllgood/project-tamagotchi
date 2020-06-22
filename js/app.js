@@ -2,8 +2,8 @@ console.log('Welcome to Project Tamagotchi!')
 
 // Create Class For Pet
 class Pet{
-    constructor(){
-        this.name = 'Pet';
+    constructor(name = 'Pet'){
+        this.name = name;
         this.hunger = 0;
         this.hungerWidth = 0;
         this.sleep = 0;
@@ -15,32 +15,62 @@ class Pet{
     }
 }
 
+//Game State
+
+
 //Instantiate Pet
 const pet = new Pet;
 
 console.log(pet);
 
-//------------DOM Elements
-//Hunger Elements
+//------------DOM 
+// Settings Page Elements
+const startGameBtn = document.querySelector('#settings-contain button');
+const petInput = document.querySelector('#settings-contain input');
+
+
+// Hunger Elements
 const hungerText = document.querySelector('#hunger p');
 const hungerBar = document.querySelector('#hunger .status-color');
 const hungerBtn = document.querySelector('#hunger button');
 
-//Sleep Elements
+// Sleep Elements
 const sleepText = document.querySelector('#sleepiness p');
 const sleepBar = document.querySelector('#sleepiness .status-color');
 const sleepBtn = document.querySelector('#sleepiness button');
 
-//Boredom Elements
+// Boredom Elements
 
 const boredText = document.querySelector('#boredom p');
 const boredBar = document.querySelector('#boredom .status-color');
 const boredBtn = document.querySelector('#boredom button');
 
-//Timer Elements
+// Timer Elements
 const timerText = document.querySelector('header p');
 
-timerControl();
+
+//-------------Event Handlers
+
+startGameBtn.addEventListener('click', startGame);
+
+hungerBtn.addEventListener('click', feedPet);
+
+sleepBtn.addEventListener('click', turnOffLights);
+
+boredBtn.addEventListener('click', playWithPet);
+
+
+//-------------Functions
+
+function startGame(){
+    document.querySelector('#settings-contain').classList.add('hidden');
+    document.querySelector('#game-contain').classList.remove('hidden');
+    // let petName = petInput.Value();
+    // pet.name = petName;
+    // console.log(pet.name);
+    timerControl();
+}
+
 
 function timerControl(){
     const timer = setInterval(()=>{
@@ -64,17 +94,6 @@ function timerControl(){
         }
     }, 1000);
 }
-
-//-------------Event Handlers
-
-hungerBtn.addEventListener('click', feedPet);
-
-sleepBtn.addEventListener('click', turnOffLights);
-
-boredBtn.addEventListener('click', playWithPet);
-
-
-//-------------Functions
 
 // Hunger Functions
 function feedPet(){

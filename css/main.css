@@ -45,8 +45,8 @@ body{
     padding:  5px 10px;
 }
 
-#game-contain{
-    display: none;
+.hidden{
+    display: none !important;
 }
 
 /* Header */
