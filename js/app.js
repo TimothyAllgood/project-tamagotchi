@@ -4,9 +4,12 @@ console.log('Welcome to Project Tamagotchi!')
 class Pet{
     constructor(){
         this.name = 'Pet';
-        this.hunger = 1;
-        this.sleep = 1;
-        this.boredom = 1;
+        this.hunger = 0;
+        this.hungerWidth = 0;
+        this.sleep = 0;
+        this.sleepWidth = 0;
+        this.boredom = 0;
+        this.boredomWidth = 0;
         this.time = 10;
     }
 }
@@ -40,9 +43,11 @@ function timerControl(){
         if(pet.time>0){
             pet.time--;
             // console.log(pet.time)
-            raiseHunger()
+            raiseHunger();
+            raiseSleep();
+            raiseBoredom();
         } else{
-            clearInterval(timer);
+            endGame(timer);
         }
     }, 1000);
 }
@@ -62,39 +67,64 @@ boredBtn.addEventListener('click', playWithPet);
 function feedPet(){
     if(pet.hunger > 1){
         pet.hunger--;
+        hungerText.textContent = `${pet.hunger}/10`
+        pet.hungerWidth -= 10;
+        hungerBar.style.width = `${pet.hungerWidth}%`
         console.log(pet.hunger);
     }
 }
 
 function raiseHunger(){
     pet.hunger++;
-    console.log('Hunger: ', pet.hunger);
+    hungerText.textContent = `${pet.hunger}/10`
+    pet.hungerWidth += 10;
+    hungerBar.style.width = `${pet.hungerWidth}%`
+    console.log('Hunger: ', pet.hungerWidth);
 }
 
 
 // Sleep Functions
 function turnOffLights(){
-    if(pet.sleep < 10){
-        pet.sleep++;
+    if(pet.sleep > 1){
+        pet.sleep--;
+        sleepText.textContent = `${pet.sleep}/10`
+        pet.sleepWidth -= 10;
+        sleepBar.style.width = `${pet.sleepWidth}%`
         console.log(pet.sleep);
     }
 }
 
 function raiseSleep(){
     pet.sleep++;
-     console.log('Sleep: ', pet.sleep);
+    sleepText.textContent = `${pet.sleep}/10`
+    pet.sleepWidth += 10;
+    sleepBar.style.width = `${pet.sleepWidth}%`
+    console.log('Sleep: ', pet.sleep);
 }
 
 
 // Boredom Functions
 function playWithPet(){
-    if(pet.boredom < 10){
-        pet.boredom++;
+    if(pet.boredom > 1){
+        pet.boredom--;
+        boredText.textContent = `${pet.boredom}/10`
+        pet.boredWidth -= 10;
+        boredBar.style.width = `${pet.boredomWidth}%`
         console.log(pet.boredom);
     }
 }
 
 function raiseBoredom(){
     pet.boredom++;
+    boredText.textContent = `${pet.boredom}/10`
+    pet.boredomWidth += 10;
+    boredBar.style.width = `${pet.boredomWidth}%`
     console.log('Boredom: ', pet.boredom);
+}
+
+
+// End game
+
+function endGame(timer){
+    clearInterval(timer);
 }
