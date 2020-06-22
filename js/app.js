@@ -1,5 +1,13 @@
 console.log('Welcome to Project Tamagotchi!')
 
+// TODO
+// Find a way to make the functions to lower stats DRY
+// Add another character
+// Make Api Call to Openweather
+// Change Background Based on current weather
+// Balance Stat Decay
+
+
 // Create Class For Pet
 class Pet{
     constructor(name = 'Pet',){
@@ -16,13 +24,8 @@ class Pet{
     }
 }
 
-
-
-
 //Instantiate Pet
-const pet = new Pet;
-
-console.log(pet);
+let pet = new Pet;
 
 //Game State
 let petImg = `../assets/${pet.selectedChar}.png`;
@@ -144,7 +147,6 @@ function timerControl(){
 function agePet(ageInterval){
     if(pet.time % ageInterval === 0){
         pet.age++;
-        console.log('Age:', pet.age);
         setAge();
     }
 }
@@ -153,7 +155,6 @@ function setName(){
     let petName = petInput.value;
     pet.name = petName || 'Pet'; // Give Name a default value
     nameText.textContent = `Name:${pet.name}`
-    console.log(pet.name);
 }
 
 function setAge(){
@@ -161,13 +162,13 @@ function setAge(){
 }
 
 // Hunger Functions
+
 function feedPet(){
     if(pet.hunger > 1){
         pet.hunger--;
         hungerText.textContent = `${pet.hunger}/10`
         pet.hungerWidth -= 10;
         hungerBar.style.width = `${pet.hungerWidth}%`
-        console.log(pet.hunger);
     }
 }
 
@@ -176,7 +177,6 @@ function raiseHunger(){
     hungerText.textContent = `${pet.hunger}/10`
     pet.hungerWidth += 10;
     hungerBar.style.width = `${pet.hungerWidth}%`
-    console.log('Hunger: ', pet.hunger);
 }
 
 // Sleep Functions
@@ -186,7 +186,6 @@ function turnOffLights(){
         sleepText.textContent = `${pet.sleep}/10`
         pet.sleepWidth -= 10;
         sleepBar.style.width = `${pet.sleepWidth}%`
-        console.log(pet.sleep);
     }
 }
 
@@ -195,7 +194,6 @@ function raiseSleep(){
     sleepText.textContent = `${pet.sleep}/10`
     pet.sleepWidth += 10;
     sleepBar.style.width = `${pet.sleepWidth}%`
-    console.log('Sleep: ', pet.sleep);
 }
 
 // Boredom Functions
@@ -205,7 +203,6 @@ function playWithPet(){
         boredText.textContent = `${pet.boredom}/10`
         pet.boredomWidth -= 10;
         boredBar.style.width = `${pet.boredomWidth}%`
-        console.log(pet.boredom);
     }
 }
 
@@ -214,7 +211,6 @@ function raiseBoredom(){
     boredText.textContent = `${pet.boredom}/10`
     pet.boredomWidth += 10;
     boredBar.style.width = `${pet.boredomWidth}%`
-    console.log('Boredom: ', pet.boredom);
 }
 // UI Functions
 // changes time to MM:SS format
@@ -250,6 +246,5 @@ function endGame(timer){
     } else{ 
         // Run this if player wins
     }
-
     clearInterval(timer);
 }
