@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
 }
 
 body{
@@ -32,8 +33,10 @@ body{
     width: 100%;
     height: 100%;
     background-image: url('../assets/bg.png');
-    filter: brightness(0.4) sepia(80%);
-    -webkit-filter: brightness(0.4) sepia(80%);
+    background-color: purple;
+    background-blend-mode: multiply;
+    filter: brightness(0.4);
+    -webkit-filter: brightness(0.4);
     position: absolute;
     top: 0;
     left: 0;
@@ -123,4 +126,27 @@ header{
     font-family: 'Press Start 2P', cursive;
     font-size: 10px;
     padding: 10px 0;
+}
+
+/* Game End Message */
+
+.game-end{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -100px;
+    opacity: 0;
+    transition: 1s ease-in all;
+    -webkit-transition: 1s ease-in all;
+    -moz-transition: 1s ease-in all;
+    -ms-transition: 1s ease-in all;
+    -o-transition: 1s ease-in all;
+}
+
+.game-end-show{
+    opacity: 1;
+    margin-top: 0;
 }

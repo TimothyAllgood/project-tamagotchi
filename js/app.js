@@ -215,6 +215,7 @@ function endGame(timer){
     // If player loses run this
     if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
         // Update pet image on death
+        document.querySelector('.game-end').classList.add('game-end-show');
         document.querySelector('#js-pet-image').style.backgroundImage = 'url(https://lh3.googleusercontent.com/proxy/zX_kjJBYozyE2r51ld_KLhkAsBmkVxcAlXEMrO2qbsgHp-80AzLDwOD9mZXdY9bi-AfhB2H2eLMkVnfjnY_d5Kkjp4vv6EA0)'
     } else{ 
         // Run this if player wins
