@@ -20,9 +20,13 @@ function apiStartGame(){
         let currentWeather = response.weather[0].main;
         if(currentWeather === 'Clouds'){
             document.querySelector('body').style.backgroundImage = 'url("./assets/cloud-bg.png")';
+            document.querySelector('.rain').style.display = 'none';
         } else if(currentWeather === 'Thunderstorm' || currentWeather === 'Rain' || currentWeather === 'Drizzle'){
             document.querySelector('body').style.backgroundImage = 'url("./assets/cloud-bg.png")';
             document.querySelector('.rain').style.display = 'block';
+        } else if(currentWeather === 'Clear'){
+            document.querySelector('body').style.backgroundImage = 'url("./assets/bg.png")';
+            document.querySelector('.rain').style.display = 'none';
         }
         console.log(response);
     };

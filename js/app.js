@@ -2,9 +2,6 @@ console.log('Welcome to Project Tamagotchi!')
 
 // TODO
 // Add another character
-// Change Background Based on current weather
-
-
 
 // Create Class For Pet
 class Pet{
@@ -16,7 +13,7 @@ class Pet{
         this.sleepWidth = 0;
         this.boredom = 0;
         this.boredomWidth = 0;
-        this.time = 60;
+        this.time = 10;
         this.age = 1;
         this.selectedChar = 'owlet'
     }
@@ -109,14 +106,16 @@ function startGame(){
 
 // Restart Game - Resets all variables to defaults
 function restartGame(){
+    if( document.querySelector('.pet-death')){
+        document.querySelector('.pet-death').style.backgroundImage = `url(assets/${petIdle})`;
+        document.querySelector('.pet-death').className = 'js-pet-image';
+    }
     document.querySelector('.game-end').classList.remove('game-end-show');
-    document.querySelector('.pet-death').style.backgroundImage = `url(assets/${petIdle})`;
     hungerBtn.addEventListener('click', feedPet);
     sleepBtn.addEventListener('click', turnOffLights);
     boredBtn.addEventListener('click', playWithPet);
     settings.classList.remove('hidden');
     gamePage.classList.add('hidden');
-    document.querySelector('.pet-death').className = 'js-pet-image';
     pet.hunger = 1;
     pet.hungerWidth = 0;
     pet.sleep = 1;
@@ -284,8 +283,11 @@ function endGame(timer){
         document.querySelector('.js-pet-image').className = 'pet-death';
         // Call this hear because .pet-death is not created until this point
         document.querySelector('.pet-death').style.backgroundImage = `url(assets/${petDeath})`;
+        document.querySelector('.game-end h2').textContent = 'You lost!';
     } else{ 
         // Run this if player wins
+        document.querySelector('.game-end').classList.add('game-end-show');
+        document.querySelector('.game-end h2').textContent = 'You won!';
     }
     clearInterval(timer);
 }
