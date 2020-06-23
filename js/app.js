@@ -118,15 +118,24 @@ function restartGame(){
     settings.classList.remove('hidden');
     gamePage.classList.add('hidden');
     document.querySelector('.pet-death').className = 'js-pet-image';
-    pet.hunger = 0;
+    pet.hunger = 1;
     pet.hungerWidth = 0;
-    pet.sleep = 0;
+    pet.sleep = 1;
     pet.sleepWidth = 0;
-    pet.boredom = 0;
+    pet.boredom = 1;
     pet.boredomWidth = 0;
     pet.time = 60;
     pet.age = 1;
+    resetStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar);
+    resetStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar);
+    resetStat(pet, 'boredom', boredText, 'boredomWidth', boredBar);
     console.log('Restart');
+}
+
+function resetStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, sleep, boredom
+    text.textContent = `${obj[stat]}/10`
+    obj[width] += 10;
+    bar.style.width = `${obj[width]}%`
 }
 
 // Character Selection Function
@@ -153,7 +162,7 @@ function timerControl(){
         if(pet.time>0){
             pet.time--;
             updateTime();
-            raiseStats(5,4,3);
+            raiseStats(3,2,1);
             // Every x seconds increase pet age
             agePet(30);
             // If pet hunger, sleep, or boredom stat reaches 10, player loses, and game ends
@@ -188,8 +197,8 @@ function setAge(){
 function raiseStats(x,y,z){
     if(pet.time % x === 0){ // Raise Sleep every 5 seconds
         console.log(`${x}s`);
-        raiseStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar);    } 
-        else if(pet.time % y === 0){ // Raise Hunger every 4 seconds
+        raiseStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar);    
+    } else if(pet.time % y === 0){ // Raise Hunger every 4 seconds
         console.log(`${y}s`);
         raiseStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar);
     } else if (pet.time % z === 0){// Raise Boredom every 3 seconds
