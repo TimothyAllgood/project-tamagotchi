@@ -117,7 +117,7 @@ header{
     min-height: 100vh;
 }
 
- .js-pet-image{
+.js-pet-image{
     width: 250px;
     height: 250px;
     background-image: url('../assets/owlet-idle.png');
@@ -126,6 +126,7 @@ header{
     */margin-bottom: -3vh;
     animation: play 1.5s steps(4) infinite ;
     -webkit-animation: play 1.5s steps(4) infinite alternate;
+    z-index: -2;
     /* filter:hue-rotate(45deg) ;
     -webkit-filter:hue-rotate(45deg) ;  use for aging*/
 }
@@ -135,6 +136,7 @@ header{
 } 
 
 .pet-death{
+    z-index: -2;
     width: 237px;
     height: 250px;
     background-image: url('../assets/owlet-death.png');
@@ -219,4 +221,16 @@ header{
 .game-end-show{
     opacity: 1;
     margin-top: 0;
+}
+
+/* Rain */
+
+.rain{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/rain.png');
+    position: absolute;
+    z-index: -1;
+    opacity: 0.5;
+    display: none;
 }

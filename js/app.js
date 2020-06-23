@@ -1,7 +1,6 @@
 console.log('Welcome to Project Tamagotchi!')
 
 // TODO
-// Find a way to make the functions to lower stats DRY
 // Add another character
 // Change Background Based on current weather
 
