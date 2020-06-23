@@ -3,7 +3,6 @@ console.log('Welcome to Project Tamagotchi!')
 // TODO
 // Find a way to make the functions to lower stats DRY
 // Add another character
-// Make Api Call to Openweather
 // Change Background Based on current weather
 // Balance Stat Decay
 
@@ -40,8 +39,8 @@ const settings = document.querySelector('#settings-contain');
 
 const characterSelect = document.querySelector('.pet-select');
 
-
 const gamePage = document.querySelector('#game-contain');
+
 // Name Elements
 const nameText = document.querySelector('#js-pet-info h3');
 
@@ -59,7 +58,6 @@ const sleepBar = document.querySelector('#sleepiness .status-color');
 const sleepBtn = document.querySelector('#sleepiness button');
 
 // Boredom Elements
-
 const boredText = document.querySelector('#boredom p');
 const boredBar = document.querySelector('#boredom .status-color');
 const boredBtn = document.querySelector('#boredom button');
@@ -128,9 +126,7 @@ function timerControl(){
         if(pet.time>0){
             pet.time--;
             updateTime();
-            raiseHunger();
-            raiseSleep();
-            raiseBoredom();
+            raiseStats(5,4,3);
             // Every x seconds increase pet age
             agePet(30);
             // If pet hunger, sleep, or boredom stat reaches 10, player loses, and game ends
@@ -159,6 +155,20 @@ function setName(){
 
 function setAge(){
     ageText.textContent = `Age:${pet.age}`;
+}
+
+// Status Update Function
+function raiseStats(x,y,z){
+    if(pet.time % x === 0){ // Raise Sleep every 5 seconds
+        console.log(`${x}s`);
+        raiseSleep();
+    } else if(pet.time % y === 0){ // Raise Hunger every 4 seconds
+        console.log(`${y}s`);
+        raiseHunger();
+    } else if (pet.time % z === 0){// Raise Boredom every 3 seconds
+        console.log(`${z}s`);
+        raiseBoredom();
+    }
 }
 
 // Hunger Functions
