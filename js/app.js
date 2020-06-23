@@ -2,6 +2,7 @@ console.log('Welcome to Project Tamagotchi!')
 
 // TODO
 // Add another character
+// Morph at certain ages
 
 // Create Class For Pet
 class Pet{
@@ -26,6 +27,7 @@ let pet = new Pet;
 let petImg = `../assets/${pet.selectedChar}.png`;
 let petIdle = `../assets/${pet.selectedChar}-idle.png`;
 let petDeath = `../assets/${pet.selectedChar}-death.png`
+let paused = false;
 
 //------------DOM 
 // Settings Page Elements
@@ -63,6 +65,7 @@ const restartButton = document.querySelector('.game-end button');
 
 // Timer Elements
 const timerText = document.querySelector('header p');
+const pauseBtn = document.getElementById('js-pause');
 
 
 //-------------Event Handlers
@@ -124,6 +127,7 @@ function restartGame(){
     pet.boredomWidth = 0;
     pet.time = 60;
     pet.age = 1;
+    paused = false;
     resetStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar);
     resetStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar);
     resetStat(pet, 'boredom', boredText, 'boredomWidth', boredBar);
@@ -167,7 +171,10 @@ function setPetImage(){
 // Timer
 
 function timerControl(){
-    const timer = setInterval(()=>{
+    
+    let timer = setInterval(timerFunc, 1000);
+
+    function timerFunc (){
         if(pet.time>0){
             pet.time--;
             updateTime();
@@ -177,11 +184,28 @@ function timerControl(){
             // If pet hunger, sleep, or boredom stat reaches 10, player loses, and game ends
             if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
                 endGame(timer);
+                pauseBtn.removeEventListener('click', pause);
             }
         } else{
             endGame(timer);
+            pauseBtn.removeEventListener('click', pause);
         }
-    }, 1000);
+    }
+    // Pause Game
+    pauseBtn.addEventListener('click', pause);
+    function pause(){
+        if(!paused){
+            clearInterval(timer);
+            pauseBtn.textContent = 'Play'
+            paused = true;
+            console.log(paused);
+        } else{
+            paused = false;
+            pauseBtn.textContent = 'Pause';
+            timer = setInterval(timerFunc, 1000);
+            console.log(paused)
+        }
+    }
 }
 
 // Pet Name and Age
@@ -217,9 +241,9 @@ function raiseStats(x,y,z){
 // Update Any Stat - Refactored with help from Michael Petty
 function raiseStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, sleep, boredom
     obj[stat]++;
-    text.textContent = `${obj[stat]}/10`
+    text.textContent = `${obj[stat]}/10`;
     obj[width] += 10;
-    bar.style.width = `${obj[width]}%`
+    bar.style.width = `${obj[width]}%`;
 }
 
 // Hunger Functions
@@ -276,6 +300,19 @@ function endGame(timer){
     hungerBtn.removeEventListener('click', feedPet);
     sleepBtn.removeEventListener('click', turnOffLights);
     boredBtn.removeEventListener('click', playWithPet);
+    pauseBtn.removeEventListener('click', ()=>{
+        if(!paused){
+            clearInterval(timer);
+            pauseBtn.textContent = 'Play'
+            paused = true;
+            console.log(paused);
+        } else{
+            paused = false;
+            pauseBtn.textContent = 'Pause';
+            timer = setInterval(timerFunc, 1000);
+            console.log(paused)
+        }
+    });
     // If player loses run this
     if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
         // Update pet image on death

@@ -111,6 +111,18 @@ header{
     justify-content: space-between;
     align-items: center;
     position: absolute;
+    z-index: 100;
+}
+
+.timer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#js-pause{
+    margin-right: 25px;
+    padding: 5px;
 }
 
 /* Pet */
@@ -157,10 +169,6 @@ header{
     100% { background-position: -2359px; }
 }
 
-
-
-
-
 /* Pet Status */
 #js-pet-status{
     display: flex;
@@ -187,13 +195,24 @@ header{
 }
 
 .status-color{
-    background: #d7d7d7;
     width: 10%;
     height: 100%;
     background-color: aqua;
     position: absolute;
     top: 0;
     left: 0;
+}
+
+#hunger .status-color{
+    background-color: lightgreen;
+}
+
+#sleepiness .status-color{
+    background-color: goldenrod;
+}
+
+#boredom .status-color{
+    background-color: indianred;
 }
 
 .status-grey p{
@@ -230,6 +249,16 @@ header{
     margin-top: 0;
 }
 
+.game-end div{
+    display: flex;
+    flex-direction: column;
+}
+
+.game-end div button{
+    padding: 5px;
+    margin-top: 15px;
+}
+
 /* Rain */
 
 .rain{
@@ -241,3 +270,4 @@ header{
     opacity: 0.5;
     display: none;
 }
+
