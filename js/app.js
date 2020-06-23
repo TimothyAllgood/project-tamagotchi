@@ -4,7 +4,7 @@ console.log('Welcome to Project Tamagotchi!')
 // Find a way to make the functions to lower stats DRY
 // Add another character
 // Change Background Based on current weather
-// Balance Stat Decay
+
 
 
 // Create Class For Pet
@@ -161,14 +161,20 @@ function setAge(){
 function raiseStats(x,y,z){
     if(pet.time % x === 0){ // Raise Sleep every 5 seconds
         console.log(`${x}s`);
-        raiseSleep();
-    } else if(pet.time % y === 0){ // Raise Hunger every 4 seconds
+        raiseStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar);    } 
+        else if(pet.time % y === 0){ // Raise Hunger every 4 seconds
         console.log(`${y}s`);
-        raiseHunger();
+        raiseStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar);
     } else if (pet.time % z === 0){// Raise Boredom every 3 seconds
         console.log(`${z}s`);
-        raiseBoredom();
-    }
+        raiseStat(pet, 'boredom', boredText, 'boredomWidth', boredBar);    }
+}
+// Update Any Stat - Refactored with help from Michael Petty
+function raiseStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, sleep, boredom
+    obj[stat]++;
+    text.textContent = `${obj[stat]}/10`
+    obj[width] += 10;
+    bar.style.width = `${obj[width]}%`
 }
 
 // Hunger Functions
@@ -182,13 +188,6 @@ function feedPet(){
     }
 }
 
-function raiseHunger(){
-    pet.hunger++;
-    hungerText.textContent = `${pet.hunger}/10`
-    pet.hungerWidth += 10;
-    hungerBar.style.width = `${pet.hungerWidth}%`
-}
-
 // Sleep Functions
 function turnOffLights(){
     if(pet.sleep > 1){
@@ -199,13 +198,6 @@ function turnOffLights(){
     }
 }
 
-function raiseSleep(){
-    pet.sleep++;
-    sleepText.textContent = `${pet.sleep}/10`
-    pet.sleepWidth += 10;
-    sleepBar.style.width = `${pet.sleepWidth}%`
-}
-
 // Boredom Functions
 function playWithPet(){
     if(pet.boredom > 1){
@@ -214,13 +206,6 @@ function playWithPet(){
         pet.boredomWidth -= 10;
         boredBar.style.width = `${pet.boredomWidth}%`
     }
-}
-
-function raiseBoredom(){
-    pet.boredom++;
-    boredText.textContent = `${pet.boredom}/10`
-    pet.boredomWidth += 10;
-    boredBar.style.width = `${pet.boredomWidth}%`
 }
 // UI Functions
 // changes time to MM:SS format
