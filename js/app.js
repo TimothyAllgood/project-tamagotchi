@@ -35,7 +35,7 @@ let petDeath = `../assets/${pet.selectedChar}-death.png`
 //------------DOM 
 // Settings Page Elements
 const startGameBtn = document.querySelector('#settings-contain button');
-const petInput = document.querySelector('#settings-contain input');
+const petInput = document.querySelector('#settings-contain .pet-name');
 const settings = document.querySelector('#settings-contain');
 
 const characterSelect = document.querySelector('.pet-select');
