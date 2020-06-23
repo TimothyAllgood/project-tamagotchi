@@ -126,6 +126,14 @@ header{
 }
 
 /* Pet */
+#js-pet-info{
+    text-align: center;
+}
+
+#js-pet-info p{
+    margin-top: 15px;
+}
+
 #js-pet-contain{
     display: flex;
     flex-direction: column;
@@ -252,6 +260,7 @@ header{
 .game-end div{
     display: flex;
     flex-direction: column;
+    margin-top: -100px;
 }
 
 .game-end div button{

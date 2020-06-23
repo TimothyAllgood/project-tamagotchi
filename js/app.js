@@ -14,7 +14,7 @@ class Pet{
         this.sleepWidth = 0;
         this.boredom = 0;
         this.boredomWidth = 0;
-        this.time = 10;
+        this.time = 60;
         this.age = 1;
         this.selectedChar = 'owlet'
     }
@@ -24,7 +24,6 @@ class Pet{
 let pet = new Pet;
 
 //Game State
-let petImg = `../assets/${pet.selectedChar}.png`;
 let petIdle = `../assets/${pet.selectedChar}-idle.png`;
 let petDeath = `../assets/${pet.selectedChar}-death.png`
 let paused = false;
@@ -147,7 +146,6 @@ function selectCharacter(e){
    if(e.target.src){
     addBorder(e);
     pet.selectedChar = e.target.alt;
-    petImg = `../assets/${pet.selectedChar}.png`;
     petIdle = `${pet.selectedChar}-idle.png`;
     petDeath = `../assets/${pet.selectedChar}-death.png`;
     setPetImage();
@@ -300,19 +298,6 @@ function endGame(timer){
     hungerBtn.removeEventListener('click', feedPet);
     sleepBtn.removeEventListener('click', turnOffLights);
     boredBtn.removeEventListener('click', playWithPet);
-    pauseBtn.removeEventListener('click', ()=>{
-        if(!paused){
-            clearInterval(timer);
-            pauseBtn.textContent = 'Play'
-            paused = true;
-            console.log(paused);
-        } else{
-            paused = false;
-            pauseBtn.textContent = 'Pause';
-            timer = setInterval(timerFunc, 1000);
-            console.log(paused)
-        }
-    });
     // If player loses run this
     if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
         // Update pet image on death
