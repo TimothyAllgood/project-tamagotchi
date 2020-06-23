@@ -62,6 +62,9 @@ const boredText = document.querySelector('#boredom p');
 const boredBar = document.querySelector('#boredom .status-color');
 const boredBtn = document.querySelector('#boredom button');
 
+// Restart Elements
+const restartButton = document.querySelector('.game-end button');
+
 // Timer Elements
 const timerText = document.querySelector('header p');
 
@@ -71,6 +74,7 @@ const timerText = document.querySelector('header p');
 startGameBtn.addEventListener('click', startGame);
 
 window.addEventListener('keydown', pressEnter);
+
 // Handle Character Selection
 characterSelect.addEventListener('click', selectCharacter);
 
@@ -81,6 +85,8 @@ sleepBtn.addEventListener('click', turnOffLights);
 
 boredBtn.addEventListener('click', playWithPet);
 
+// Handle Restart
+restartButton.addEventListener('click', restartGame);
 
 //-------------Functions
 
@@ -100,6 +106,27 @@ function startGame(){
     setName();
     setAge();
     timerControl();
+}
+
+// Restart Game - Resets all variables to defaults
+function restartGame(){
+    document.querySelector('.game-end').classList.remove('game-end-show');
+    document.querySelector('.pet-death').style.backgroundImage = `url(assets/${petIdle})`;
+    hungerBtn.addEventListener('click', feedPet);
+    sleepBtn.addEventListener('click', turnOffLights);
+    boredBtn.addEventListener('click', playWithPet);
+    settings.classList.remove('hidden');
+    gamePage.classList.add('hidden');
+    document.querySelector('.pet-death').className = 'js-pet-image';
+    pet.hunger = 0;
+    pet.hungerWidth = 0;
+    pet.sleep = 0;
+    pet.sleepWidth = 0;
+    pet.boredom = 0;
+    pet.boredomWidth = 0;
+    pet.time = 60;
+    pet.age = 1;
+    console.log('Restart');
 }
 
 // Character Selection Function
@@ -133,7 +160,7 @@ function timerControl(){
             if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
                 endGame(timer);
             }
-        }  else{
+        } else{
             endGame(timer);
         }
     }, 1000);
