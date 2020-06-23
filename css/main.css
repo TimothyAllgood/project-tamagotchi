@@ -57,12 +57,17 @@ body{
     width: 150px;
     margin-top: 25px;
     margin-bottom: 50px;
+    padding: 15px;
 }
 
 #settings-contain img:hover{
     cursor: pointer;
     filter: brightness(1.2);
     -webkit-filter: brightness(1.2);
+}
+
+.selected-pet{
+    border: 5px solid purple;
 }
 
 #settings-contain p{
@@ -151,6 +156,8 @@ header{
     0%{ background-position: -245px;}
     100% { background-position: -2359px; }
 }
+
+
 
 
 

@@ -12,8 +12,6 @@ window.addEventListener('keydown', apiPressEnter);
 
 // https://openweathermap.org/weather-conditions
 
-
-
 function apiStartGame(){
     city = cityInput.value.replace(/\s/g, '+').toLowerCase() || 'Covington';
     url = `https://api.openweathermap.org/data/2.5/weather?q=${city},us&appid=${apiKey}`;
@@ -23,6 +21,7 @@ function apiStartGame(){
         if(currentWeather === 'Clouds'){
             document.querySelector('body').style.backgroundImage = 'url("./assets/cloud-bg.png")';
         } else if(currentWeather === 'Thunderstorm' || currentWeather === 'Rain' || currentWeather === 'Drizzle'){
+            document.querySelector('body').style.backgroundImage = 'url("./assets/cloud-bg.png")';
             document.querySelector('.rain').style.display = 'block';
         }
         console.log(response);

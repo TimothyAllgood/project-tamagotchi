@@ -142,12 +142,23 @@ function resetStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, 
 function selectCharacter(e){
     //if target has src it is an image
    if(e.target.src){
+    addBorder(e);
     pet.selectedChar = e.target.alt;
     petImg = `../assets/${pet.selectedChar}.png`;
     petIdle = `${pet.selectedChar}-idle.png`;
     petDeath = `../assets/${pet.selectedChar}-death.png`;
     setPetImage();
    }   
+}
+
+function addBorder(e){
+    if(e.target.id === 'owlet'){
+        e.target.classList.add('selected-pet');
+        document.getElementById('pinky').classList.remove('selected-pet');
+    } else if(e.target.id === 'pinky'){
+        e.target.classList.add('selected-pet');
+        document.getElementById('owlet').classList.remove('selected-pet');
+    }
 }
 // Set background-image for idle animation
 function setPetImage(){
