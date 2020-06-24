@@ -23,6 +23,8 @@ function apiStartGame(){
             document.querySelector('.rain').style.display = 'none';
         } else if(currentWeather === 'Thunderstorm' || currentWeather === 'Rain' || currentWeather === 'Drizzle'){
             document.querySelector('body').style.backgroundImage = 'url("./assets/cloud-bg.png")';
+            document.querySelector('body').style.backgroundColor = '#333';
+            document.querySelector('body').style.backgroundBlendMode = 'multiply';
             document.querySelector('.rain').style.display = 'block';
         } else if(currentWeather === 'Clear'){
             document.querySelector('body').style.backgroundImage = 'url("./assets/bg.png")';
