@@ -114,9 +114,9 @@ function restartGame(){
     }
     document.querySelector('.js-pet-image').style.filter = 'none';
     document.querySelector('.game-end').classList.remove('game-end-show');
-    hungerBtn.addEventListener('click', feedPet);
-    sleepBtn.addEventListener('click', turnOffLights);
-    boredBtn.addEventListener('click', playWithPet);
+    hungerBtn.addEventListener('click', () => lowerStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar));
+    sleepBtn.addEventListener('click', () => lowerStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar));
+    boredBtn.addEventListener('click', () => lowerStat(pet, 'boredom', boredText, 'boredomWidth', boredBar));
     settings.classList.remove('hidden');
     gamePage.classList.add('hidden');
     pet.hunger = 1;
