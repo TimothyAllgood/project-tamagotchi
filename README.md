@@ -62,3 +62,9 @@ Stretch - Animate your pet across the screen while it's alive, and change to a d
 ### Step Five
 
 - Additional functionality added.
+
+
+## Installation Instructions
+
+-Clone repo.
+-Open index.html in your browser.

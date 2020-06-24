@@ -112,6 +112,7 @@ function restartGame(){
         document.querySelector('.pet-death').style.backgroundImage = `url(assets/${petIdle})`;
         document.querySelector('.pet-death').className = 'js-pet-image';
     }
+    document.querySelector('.js-pet-image').style.filter = 'none';
     document.querySelector('.game-end').classList.remove('game-end-show');
     hungerBtn.addEventListener('click', feedPet);
     sleepBtn.addEventListener('click', turnOffLights);
@@ -179,6 +180,13 @@ function timerControl(){
             raiseStats(3,2,1);
             // Every x seconds increase pet age
             agePet(30);
+            if(pet.age === 2){
+                document.querySelector('.js-pet-image').style.filter='hue-rotate(45deg)';
+            } else if(pet.age > 2){
+                document.querySelector('.js-pet-image').style.filter='grayscale(1)';
+            } else{
+                document.querySelector('.js-pet-image').style.filter = 'none';
+            }
             // If pet hunger, sleep, or boredom stat reaches 10, player loses, and game ends
             if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
                 endGame(timer);
