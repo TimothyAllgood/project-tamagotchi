@@ -1,9 +1,5 @@
 console.log('Welcome to Project Tamagotchi!')
 
-// TODO
-// Add another character
-// Morph at certain ages
-
 // Create Class For Pet
 class Pet{
     constructor(name = 'Pet',){
@@ -33,9 +29,9 @@ let paused = false;
 const startGameBtn = document.querySelector('#settings-contain button');
 const petInput = document.querySelector('#settings-contain .pet-name');
 const settings = document.querySelector('#settings-contain');
-
 const characterSelect = document.querySelector('.pet-select');
 
+// Main Game Elements
 const gamePage = document.querySelector('#game-contain');
 
 // Name Elements
@@ -98,6 +94,7 @@ function pressEnter(e){
     }
 }
 
+// Function starts timer and sets name and age. Hides setting page and reveals main game screen
 function startGame(){
     settings.classList.add('hidden');
     gamePage.classList.remove('hidden');
@@ -134,6 +131,7 @@ function restartGame(){
     console.log('Restart');
 }
 
+// Resets hunger, sleepiness, and boredom text and progress bars to default values.
 function resetStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, sleep, boredom
     text.textContent = `${obj[stat]}/10`
     obj[width] += 10;
@@ -141,7 +139,6 @@ function resetStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, 
 }
 
 // Character Selection Function
-
 function selectCharacter(e){
     //if target has src it is an image
    if(e.target.src){
@@ -153,16 +150,17 @@ function selectCharacter(e){
    }   
 }
 
+// Adds border around character that is currently selected to make it clear which character you have picked
 function addBorder(e){
-    if(e.target.id === 'owlet'){
-        e.target.classList.add('selected-pet');
+    if(e.target.id === 'owlet'){ 
+        e.target.classList.add('selected-pet'); // add class to add border around clicked image
         document.getElementById('pinky').classList.remove('selected-pet');
         document.getElementById('dude').classList.remove('selected-pet');
-    } else if(e.target.id === 'pinky'){
+    } else if(e.target.id === 'pinky'){ // add class to add border around clicked image
         e.target.classList.add('selected-pet');
         document.getElementById('owlet').classList.remove('selected-pet');
         document.getElementById('dude').classList.remove('selected-pet');
-    } else if(e.target.id === 'dude'){
+    } else if(e.target.id === 'dude'){ // add class to add border around clicked image
         e.target.classList.add('selected-pet');
         document.getElementById('owlet').classList.remove('selected-pet');
         document.getElementById('pinky').classList.remove('selected-pet');
@@ -173,26 +171,20 @@ function setPetImage(){
     document.querySelector('.js-pet-image').style.backgroundImage = `url(assets/${petIdle})`;
 }
 
-// Timer
+// Timer - Main Game logic goes here
 
 function timerControl(){
     
-    let timer = setInterval(timerFunc, 1000);
+    let timer = setInterval(timerFunc, 1000); // Initialize timer on game start, will update every second
 
+    // Callback function for timer, houses main game logic
     function timerFunc (){
-        if(pet.time>0){
+        if(pet.time>0){ // If time is above 0, game will keep updating
             pet.time--;
-            updateTime();
-            raiseStats(3,2,1);
-            // Every x seconds increase pet age
-            agePet(30);
-            if(pet.age === 2){
-                document.querySelector('.js-pet-image').style.filter='hue-rotate(45deg)';
-            } else if(pet.age > 2){
-                document.querySelector('.js-pet-image').style.filter='grayscale(1)';
-            } else{
-                document.querySelector('.js-pet-image').style.filter = 'none';
-            }
+            updateTime(); // Updates timer ui
+            raiseStats(3,2,1); // Change these values to control the time that boredom, hunger, sleepiness decay in that order,
+            agePet(30); // Every x seconds increase pet age
+            morphPet(pet, 'age'); // Add filters to change image color at certain breakpoints
             // If pet hunger, sleep, or boredom stat reaches 10, player loses, and game ends
             if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
                 endGame(timer);
@@ -206,12 +198,12 @@ function timerControl(){
     // Pause Game
     pauseBtn.addEventListener('click', pause);
     function pause(){
-        if(!paused){
+        if(!paused){ // Checks if game is paused, if its not stop timer
             clearInterval(timer);
             pauseBtn.textContent = 'Play'
             paused = true;
             console.log(paused);
-        } else{
+        } else{ // else restart timer
             paused = false;
             pauseBtn.textContent = 'Pause';
             timer = setInterval(timerFunc, 1000);
@@ -226,13 +218,12 @@ function agePet(ageInterval){
         pet.age++;
         setAge();
     }
-    morphPet();
 }
 
-function morphPet(){
-    if(pet.age === 2){
+function morphPet(obj, age){
+    if(obj[age] === 2){
         document.querySelector('.js-pet-image').style.filter='hue-rotate(45deg)';
-    } else if(pet.age > 2){
+    } else if(obj[age]  > 2){
         document.querySelector('.js-pet-image').style.filter='grayscale(1)';
     } else{
         document.querySelector('.js-pet-image').style.filter = 'none';
@@ -240,7 +231,7 @@ function morphPet(){
 }
 
 function setName(){
-    let petName = petInput.value;
+    let petName = petInput.value; // Player input for pet name
     pet.name = petName || 'Pet'; // Give Name a default value
     nameText.textContent = `Name:${pet.name}`
 }
@@ -251,13 +242,13 @@ function setAge(){
 
 // Status Update Function
 function raiseStats(x,y,z){
-    if(pet.time % x === 0){ // Raise Sleep every 5 seconds
+    if(pet.time % x === 0){ // Raise Sleep every x seconds
         console.log(`${x}s`);
         raiseStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar);    
-    } else if(pet.time % y === 0){ // Raise Hunger every 4 seconds
+    } else if(pet.time % y === 0){ // Raise Hunger every y seconds
         console.log(`${y}s`);
         raiseStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar);
-    } else if (pet.time % z === 0){// Raise Boredom every 3 seconds
+    } else if (pet.time % z === 0){// Raise Boredom every z seconds
         console.log(`${z}s`);
         raiseStat(pet, 'boredom', boredText, 'boredomWidth', boredBar);    }
 }
@@ -293,7 +284,7 @@ function convertTime(){
     return prettyTime(minutes,'0',2)+':' + prettyTime(seconds,'0',2);
     
 }
-// updates timer text
+// Updates timer text
 function updateTime(){
     timerText.textContent = `${convertTime()}`;
 }
@@ -318,5 +309,5 @@ function endGame(timer){
         document.querySelector('.game-end').classList.add('game-end-show');
         document.querySelector('.game-end h2').textContent = 'You won!';
     }
-    clearInterval(timer);
+    clearInterval(timer); // Stop timer
 }
