@@ -25,6 +25,8 @@ function apiStartGame(){
             document.querySelector('body').style.backgroundImage = 'url("./assets/cloud-bg.png")';
             document.querySelector('body').style.backgroundColor = '#333';
             document.querySelector('body').style.backgroundBlendMode = 'multiply';
+            document.querySelector('body').style.color = '#f1f1f1';
+            // document.querySelector('body').style.textShadow = '1px 1px 1px black';
             document.querySelector('.rain').style.display = 'block';
         } else if(currentWeather === 'Clear'){
             document.querySelector('body').style.backgroundImage = 'url("./assets/bg.png")';

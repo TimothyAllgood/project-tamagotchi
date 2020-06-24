@@ -18,7 +18,6 @@ body{
     background-attachment: fixed;
 }
 
-
 /* Settings Page */
 #settings-contain{
     width: 100vw;
@@ -228,6 +227,7 @@ header{
 
 .status-grey p{
     position: relative;
+    color: #101010;
 }
 
 .status button{

@@ -157,9 +157,15 @@ function addBorder(e){
     if(e.target.id === 'owlet'){
         e.target.classList.add('selected-pet');
         document.getElementById('pinky').classList.remove('selected-pet');
+        document.getElementById('dude').classList.remove('selected-pet');
     } else if(e.target.id === 'pinky'){
         e.target.classList.add('selected-pet');
         document.getElementById('owlet').classList.remove('selected-pet');
+        document.getElementById('dude').classList.remove('selected-pet');
+    } else if(e.target.id === 'dude'){
+        e.target.classList.add('selected-pet');
+        document.getElementById('owlet').classList.remove('selected-pet');
+        document.getElementById('pinky').classList.remove('selected-pet');
     }
 }
 // Set background-image for idle animation
@@ -219,6 +225,17 @@ function agePet(ageInterval){
     if(pet.time % ageInterval === 0){
         pet.age++;
         setAge();
+    }
+    morphPet();
+}
+
+function morphPet(){
+    if(pet.age === 2){
+        document.querySelector('.js-pet-image').style.filter='hue-rotate(45deg)';
+    } else if(pet.age > 2){
+        document.querySelector('.js-pet-image').style.filter='grayscale(1)';
+    } else{
+        document.querySelector('.js-pet-image').style.filter = 'none';
     }
 }
 
