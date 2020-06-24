@@ -128,7 +128,6 @@ function restartGame(){
     resetStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar);
     resetStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar);
     resetStat(pet, 'boredom', boredText, 'boredomWidth', boredBar);
-    console.log('Restart');
 }
 
 // Resets hunger, sleepiness, and boredom text and progress bars to default values.
@@ -202,12 +201,10 @@ function timerControl(){
             clearInterval(timer);
             pauseBtn.textContent = 'Play'
             paused = true;
-            console.log(paused);
         } else{ // else restart timer
             paused = false;
             pauseBtn.textContent = 'Pause';
             timer = setInterval(timerFunc, 1000);
-            console.log(paused)
         }
     }
 }
@@ -243,13 +240,10 @@ function setAge(){
 // Status Update Function
 function raiseStats(x,y,z){
     if(pet.time % x === 0){ // Raise Sleep every x seconds
-        console.log(`${x}s`);
         raiseStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar);    
     } else if(pet.time % y === 0){ // Raise Hunger every y seconds
-        console.log(`${y}s`);
         raiseStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar);
     } else if (pet.time % z === 0){// Raise Boredom every z seconds
-        console.log(`${z}s`);
         raiseStat(pet, 'boredom', boredText, 'boredomWidth', boredBar);    }
 }
 // Update Any Stat - Refactored with help from Michael Petty
@@ -301,7 +295,7 @@ function endGame(timer){
         // Update pet image on death
         document.querySelector('.game-end').classList.add('game-end-show');
         document.querySelector('.js-pet-image').className = 'pet-death';
-        // Call this hear because .pet-death is not created until this point
+        // Call this here because .pet-death is not created until this point
         document.querySelector('.pet-death').style.backgroundImage = `url(assets/${petDeath})`;
         document.querySelector('.game-end h2').textContent = 'You lost!';
     } else{ 
