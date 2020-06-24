@@ -246,6 +246,9 @@ function raiseStats(x,y,z){
 }
 // Update Any Stat - Refactored with help from Michael Petty
 function raiseStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, sleep, boredom
+    if(obj[stat] > 10){
+        obj[stat] = 10;
+    }
     obj[stat]++;
     text.textContent = `${obj[stat]}/10`;
     obj[width] += 10;
@@ -282,9 +285,9 @@ function updateTime(){
 
 function endGame(timer){
     // Remove listeners once game is over, fixes bug that allows player to adjust stat values after game is over
-    hungerBtn.removeEventListener('click', feedPet);
-    sleepBtn.removeEventListener('click', turnOffLights);
-    boredBtn.removeEventListener('click', playWithPet);
+    hungerBtn.removeEventListener('click', () => lowerStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar));
+    sleepBtn.removeEventListener('click', () => lowerStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar));
+    boredBtn.removeEventListener('click', () => lowerStat(pet, 'boredom', boredText, 'boredomWidth', boredBar));
     // If player loses run this
     if(pet.hunger === 10 || pet.sleep === 10 || pet.boredom === 10){
         // Update pet image on death
