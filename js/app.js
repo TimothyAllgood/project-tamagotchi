@@ -77,11 +77,11 @@ window.addEventListener('keydown', pressEnter);
 characterSelect.addEventListener('click', selectCharacter);
 
 // Handle Status Updates
-hungerBtn.addEventListener('click', feedPet);
+hungerBtn.addEventListener('click', () => lowerStat(pet, 'hunger', hungerText, 'hungerWidth', hungerBar));
 
-sleepBtn.addEventListener('click', turnOffLights);
+sleepBtn.addEventListener('click', () => lowerStat(pet, 'sleep', sleepText, 'sleepWidth', sleepBar));
 
-boredBtn.addEventListener('click', playWithPet);
+boredBtn.addEventListener('click', () => lowerStat(pet, 'boredom', boredText, 'boredomWidth', boredBar));
 
 // Handle Restart
 restartButton.addEventListener('click', restartGame);
@@ -252,36 +252,15 @@ function raiseStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, 
     bar.style.width = `${obj[width]}%`;
 }
 
-// Hunger Functions
-
-function feedPet(){
-    if(pet.hunger > 1){
-        pet.hunger--;
-        hungerText.textContent = `${pet.hunger}/10`
-        pet.hungerWidth -= 10;
-        hungerBar.style.width = `${pet.hungerWidth}%`
+function lowerStat(obj, stat, text, width, bar){ //obj = object, stat = hunger, sleep, boredom
+    if(obj[stat] > 1){
+        obj[stat]--;
+        text.textContent = `${obj[stat]}/10`;
+        obj[width] -= 10;
+        bar.style.width = `${obj[width]}%`;
     }
 }
 
-// Sleep Functions
-function turnOffLights(){
-    if(pet.sleep > 1){
-        pet.sleep--;
-        sleepText.textContent = `${pet.sleep}/10`
-        pet.sleepWidth -= 10;
-        sleepBar.style.width = `${pet.sleepWidth}%`
-    }
-}
-
-// Boredom Functions
-function playWithPet(){
-    if(pet.boredom > 1){
-        pet.boredom--;
-        boredText.textContent = `${pet.boredom}/10`
-        pet.boredomWidth -= 10;
-        boredBar.style.width = `${pet.boredomWidth}%`
-    }
-}
 // UI Functions
 // changes time to MM:SS format
 function prettyTime(string,pad,length) {
