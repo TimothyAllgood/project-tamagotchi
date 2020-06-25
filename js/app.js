@@ -30,6 +30,7 @@ const startGameBtn = document.querySelector('#settings-contain button');
 const petInput = document.querySelector('#settings-contain .pet-name');
 const settings = document.querySelector('#settings-contain');
 const characterSelect = document.querySelector('.pet-select');
+const timeInput = document.getElementById('time');
 
 // Main Game Elements
 const gamePage = document.querySelector('#game-contain');
@@ -100,6 +101,7 @@ function startGame(){
     gamePage.classList.remove('hidden');
     setName();
     setAge();
+    setTime();
     timerControl();
 }
 
@@ -227,6 +229,7 @@ function morphPet(obj, age){
     }
 }
 
+// Functions to change pet name, amount of time to play, and age
 function setName(){
     let petName = petInput.value; // Player input for pet name
     pet.name = petName || 'Pet'; // Give Name a default value
@@ -235,6 +238,11 @@ function setName(){
 
 function setAge(){
     ageText.textContent = `Age:${pet.age}`;
+}
+
+function setTime(){
+    pet.time = timeInput.value * 60;
+    updateTime();
 }
 
 // Status Update Function
@@ -305,4 +313,3 @@ function endGame(timer){
     }
     clearInterval(timer); // Stop timer
 }
-
