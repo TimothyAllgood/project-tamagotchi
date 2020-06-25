@@ -284,6 +284,42 @@ header{
     display: none;
 }
 
+
+/* Graveyard */
+
+.graveyard-contain{
+    position: absolute;
+    width: 25vw;
+    height: 100vh;
+    left: 2.5vw;
+    top: 8vh;
+}
+
+.graveyard-contain button{
+    margin-bottom: 2vh;
+}
+
+.graveyard-contain ul{
+    list-style-type: none;
+    opacity: 0;
+    transition: .5s ease-in opacity;
+    -webkit-transition: .5s ease-in opacity;
+    -moz-transition: .5s ease-in opacity;
+    -ms-transition: .5s ease-in opacity;
+    -o-transition: .5s ease-in opacity;
+}
+
+.graveyard-contain ul.show-graveyard{
+    opacity: 1;
+}
+
+.rainbow{
+    font-size: 1.2rem;
+  background: -webkit-linear-gradient(#9400d3, #4b0082, #0000ff, #00ff00, #ffff00, #ff7f00, #ff0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 600px){
@@ -337,5 +373,9 @@ header{
 
     .game-end div{
         margin-top: -175px;
+    }
+
+    .graveyard-contain{
+        display: none;
     }
 }

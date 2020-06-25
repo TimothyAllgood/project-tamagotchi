@@ -23,6 +23,8 @@ let pet = new Pet;
 let petIdle = `../assets/${pet.selectedChar}-idle.png`;
 let petDeath = `../assets/${pet.selectedChar}-death.png`
 let paused = false;
+let totalPets = 0;
+let petGraveYard = [];
 
 //------------DOM 
 // Settings Page Elements
@@ -63,6 +65,11 @@ const restartButton = document.querySelector('.game-end button');
 const timerText = document.querySelector('header p');
 const pauseBtn = document.getElementById('js-pause');
 
+// Graveyard Elements
+const graveyard = document.querySelector('.graveyard-contain');
+const graveyardUl = document.querySelector('.graveyard-contain ul');
+const graveyardBtn = document.querySelector('.graveyard-contain button');
+
 
 //-------------Event Handlers
 // Handle Start Game if Button is clicked or Enter is pressed
@@ -82,6 +89,9 @@ boredBtn.addEventListener('click', () => lowerStat(pet, 'boredom', boredText, 'b
 
 // Handle Restart
 restartButton.addEventListener('click', restartGame);
+
+// Handle Showing Graveyard
+graveyardBtn.addEventListener('click', showDeadPets);
 
 //-------------Functions
 
@@ -103,6 +113,7 @@ function startGame(){
     setAge();
     setTime();
     timerControl();
+    addToGraveyard();
 }
 
 // Restart Game - Resets all variables to defaults
@@ -176,14 +187,14 @@ function setPetImage(){
 
 function timerControl(){
     
-    let timer = setInterval(timerFunc, 1000); // Initialize timer on game start, will update every second
+    let timer = setInterval(timerFunc, 500); // Initialize timer on game start, will update every second
 
     // Callback function for timer, houses main game logic
     function timerFunc (){
         if(pet.time>0){ // If time is above 0, game will keep updating
             pet.time--;
             updateTime(); // Updates timer ui
-            raiseStats(3,2,1); // Change these values to control the time that boredom, hunger, sleepiness decay in that order,
+            raiseStats(3, 2, 1); // Change these values to control the time that boredom, hunger, sleepiness decay in that order,
             agePet(30); // Every x seconds increase pet age
             morphPet(pet, 'age'); // Add filters to change image color at certain breakpoints
             // If pet hunger, sleep, or boredom stat reaches 10, player loses, and game ends
@@ -305,11 +316,66 @@ function endGame(timer){
         document.querySelector('.js-pet-image').className = 'pet-death';
         // Call this here because .pet-death is not created until this point
         document.querySelector('.pet-death').style.backgroundImage = `url(assets/${petDeath})`;
-        document.querySelector('.game-end h2').textContent = 'You lost!';
+        populateGraveyard();
+        displayDeathMessage();
+        
+        console.log(petGraveYard);
     } else{ 
         // Run this if player wins
         document.querySelector('.game-end').classList.add('game-end-show');
         document.querySelector('.game-end h2').textContent = 'You won!';
     }
     clearInterval(timer); // Stop timer
+}
+// creates object containing info about each pet's death
+function populateGraveyard(){
+    petGraveYard.push({   
+    });
+    petGraveYard[totalPets].name = pet.name;
+    petGraveYard[totalPets].age = pet.age;
+    if(pet.hunger === 10){
+        petGraveYard[totalPets].cause = 'Starvation';
+    } else if(pet.boredom === 10){
+        petGraveYard[totalPets].cause = 'Boredom';
+    } else if(pet.sleep === 10){
+        petGraveYard[totalPets].cause = 'Sleep Deprivation';
+    }
+    totalPets++;
+}
+
+// displays a different message for each type of death
+function displayDeathMessage(){
+    if(pet.hunger === 10){
+        document.querySelector('.game-end h2').textContent = `${pet.name} starved! You lost!`;
+    } else if(pet.boredom === 10){
+        document.querySelector('.game-end h2').textContent = `${pet.name} died of boredom! You lost!`;
+    } else if(pet.sleep === 10){
+        document.querySelector('.game-end h2').textContent = `${pet.name} didn't get enough sleep! You lost!`;
+    }
+}
+
+// add each pet to graveyard and add to DOM
+
+function addToGraveyard(){
+    if(petGraveYard.length > 0){
+        graveyardUl.innerHTML = ''; // clear out ul to prevent duplicates
+        for(let pet in petGraveYard){
+            let petLi = `<li>Name:${petGraveYard[pet].name}</li>
+            <li>Age:${petGraveYard[pet].age}</li>
+            <li>Cause of Death:${petGraveYard[pet].cause}</li>
+            </br>`
+            graveyardUl.insertAdjacentHTML('beforeend', petLi);
+        }
+    }
+}
+
+// show all pets player has let die
+
+function showDeadPets(){
+    graveyardUl.classList.toggle('show-graveyard'); // toggles opacity class
+    if(graveyardUl.classList.contains('show-graveyard')){
+        graveyardBtn.textContent = 'Hide Graveyard';
+    } else{
+        graveyardBtn.textContent = 'Show Graveyard';
+    }
 }
