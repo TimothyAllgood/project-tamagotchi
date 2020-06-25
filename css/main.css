@@ -283,3 +283,58 @@ header{
     display: none;
 }
 
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 600px){
+    
+    *{
+        font-size: 1rem;
+    }
+
+    header{
+        flex-direction: column;
+    }
+
+    header h1{
+        margin-bottom: 15px;
+    }
+
+    #settings-contain div{
+        margin-top:0px;
+    }
+
+    #settings-contain div p:first-child{
+        display: none;
+    }
+
+    #settings-contain div img{
+        margin-top: 150px;
+        width: 100px;
+    }
+
+    .js-pet-image, .pet-death {
+        margin-top: 50px;
+        width: 125px;
+        height: 125px;
+    }
+
+    .status-grey {
+        margin-top: 25px;
+        width: 85px;
+    }
+
+    .status button{
+        width: 100px;
+        height: 45px;
+    }
+    .status-grey p {
+        position: absolute;
+        top: 4px;
+        left: 20px;  
+        font-size: 0.8rem;
+    }
+
+    .game-end div{
+        margin-top: -175px;
+    }
+}

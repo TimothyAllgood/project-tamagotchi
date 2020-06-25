@@ -305,3 +305,4 @@ function endGame(timer){
     }
     clearInterval(timer); // Stop timer
 }
+
