@@ -1,4 +1,6 @@
 # Project Tamagotchi
+## [View Project Live](https://pages.git.generalassemb.ly/TimothyAllgood/project-tamagotchi/)
+
 
 ![Wireframe Image](./assets/wireframe-2.png)
 ![Wireframe Image 2](./assets/wireframe.png)
